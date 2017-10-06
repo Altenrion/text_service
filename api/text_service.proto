@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package text_service;
+
+
+// Types
+message Message{
+    string sender = 1;
+    string text = 2;
+}
+
+
+// Services
+service textService{
+
+    rpc TransformMessage( Message) returns ( Message) {}
+
+}
