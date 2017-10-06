@@ -13,10 +13,10 @@ import (
 
 func main()  {
 
-	backHost := flag.String("host", "localhost:8080","Address of the service backend")
+	backHost := flag.String("b", "localhost:8080","Address of the service backend")
 	flag.Parse()
 
-	if len(os.Args) <3 {
+	if flag.NArg() <1 {
 		fmt.Printf("usage:\n\t%s \"text to speak\"\n", os.Args[0])
 		os.Exit(1)
 	}
@@ -32,7 +32,7 @@ func main()  {
 
 	client := pb.NewTextServiceClient(conn)
 
-	message := &pb.Message{Sender: os.Args[1] , Text:  os.Args[2] }
+	message := &pb.Message{Sender: flag.Arg(0) , Text:  flag.Arg(1) }
 	res, err := client.TransformMessage(context.Background(), message)
 	if err != nil {
 		log.Fatalf("could not say %s: %v", message.Text, err)

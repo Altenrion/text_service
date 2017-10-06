@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1 # for versions before 1.7.0 use apps/v1beta1
+kind: Deployment
+metadata:
+  name: text-service-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: text-service-server
+  template:
+    metadata:
+      labels:
+        app: text-service-server
+    spec:
+      containers:
+      - name: text-service-server
+        image: gcr.io/text-service/text_service_server
+        ports:
+        - containerPort: 8080
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: text-service
+spec:
+  selector:
+    app: text-service-server
+  ports:
+  - protocol: TCP
+    port: 8080
+  type: LoadBalancer

@@ -31,6 +31,21 @@ localrun:
 #	kill $(sudo lsof -t -i:$(PORT))
 	docker run -p 8080:8080 $(APPNAME)
 
+
+cloudpush:
+	@echo "Change Docker tags ..."
+	@echo "----------------------------------------"
+	docker tag $(IMAGENAME) gcr.io/text-service/$(IMAGENAME)
+	@echo "----------------------------------------"
+	@echo "push Docker container ..."
+	@echo "----------------------------------------"
+	gcloud docker -- push gcr.io/text-service/$(IMAGENAME)
+	@echo "----------------------------------------"
+	@echo "Container pushed to cloud successfully! "
+	@echo "----------------------------------------"
+
+
+
 push:
 	@echo "Change Docker tags ..."
 	@echo "----------------------------------------"

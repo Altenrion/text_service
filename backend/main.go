@@ -8,20 +8,12 @@ import (
 	"google.golang.org/grpc"
 	"golang.org/x/net/context"
 	pb "github.com/altenrion/text_service/api"
-	"os"
-	"log"
 )
 
 func main(){
 
 	port := flag.Int("p", 8080, "Some passed port")
 	flag.Parse()
-
-	//SomeArg := os.Args[1]
-
-
-
-
 
 
 	logrus.Infof("Listening to port %d", *port)
@@ -58,18 +50,3 @@ func (server) TransformMessage (ctx context.Context, message *pb.Message) ( *pb.
 	return replyMessage, nil
 
 }
-
-	//SomeArg := os.Args[1]
-	//
-	//if SomeArg == ""{
-	//	log.Fatal("You forgot the param")
-	//}
-	//
-	////log.SetFormatter(&log.JSONFormatter{})
-	//
-	//log.SetOutput(os.Stdout)
-	//
-	//log.WithFields(log.Fields{
-	//	"param": SomeArg,
-	//	"comment":   "what's that???",
-	//}).Info("Some variable was passed...")
